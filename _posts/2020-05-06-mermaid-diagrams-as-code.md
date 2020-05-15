@@ -6,7 +6,7 @@ date:   2020-05-06 21:44:37 -0700
 
 # mermaid, diagrams as code
 
-(mermaid.js)[https://mermaid-js.github.io/]
+[mermaid.js](https://mermaid-js.github.io/)
 
 Mermaid is a great tool for creating quick diagrams with text.
 It has been getting features and in recent months has improved greatly.
@@ -220,7 +220,7 @@ graph LR
 
 We could template one of these modules if it is variable, such as a database:
 
-```mustache
+```
 graph LR
   module1 --> module2
   module2 --> {{database}}
@@ -231,7 +231,7 @@ This affords us a visual representation of your replacable modules, and the modu
 
 We could map out an entire service with mermaid, easily updating the visual documentation when a part is swapped out:
 
-```mustache
+```
 graph LR
   {{gw}} --> {{api}}
   {{api}} --> {{database}}
@@ -243,7 +243,7 @@ graph LR
 
 An example FAST template that might represent a common pattern in an infrastructure:
 
-```yaml
+```
 parameters:
   gw: nginx
   api: PaymentsAPI
