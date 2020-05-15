@@ -14,18 +14,18 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: zinkem's code blog
+title: grand reified theory
 email: zinkem@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
     All things code.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: zinkemp
-github_username:  zinkem
+github_username: zinkem
 
 # Build settings
 markdown: kramdown
-theme: midnight
+theme: minima
 plugins:
   - jekyll-feed
 
