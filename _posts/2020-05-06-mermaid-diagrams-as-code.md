@@ -76,7 +76,7 @@ There may be a surefire way to parse this information from the code, but its wor
 
 In fact, this snippet might be useful to you right now to get started translating your javascript modules into architectural diagrams.
 
-```JavaScript
+```javascript
 /*
 * this script takes the output of : grep 'require(' and turns it into a
 * mermaid dependency graph for the request module  
@@ -196,12 +196,10 @@ graph LR
 We could template one of these modules if it is variable, such as a database:
 
 ```
-{% raw %}
-graph LR
+{% raw %}graph LR
   module1 --> module2
   module2 --> {{database}}
-  module3 --> {{database}}
-{% endraw %}
+  module3 --> {{database}}{% endraw %}
 ```
 
 This affords us a visual representation of your replacable modules, and the module structure itself. That can be quickly used in a documentation repository.
@@ -209,22 +207,19 @@ This affords us a visual representation of your replacable modules, and the modu
 We could map out an entire service with mermaid, easily updating the visual documentation when a part is swapped out:
 
 ```
-{% raw %}
-graph LR
+{% raw %}graph LR
   {{gw}} --> {{api}}
   {{api}} --> {{database}}
   {{nginx}} --> {{static_files}}
   {{nginx}} --> {{auth_backend}}
   {{auth_backend}} --> {{mgmt_db}}
-  {{ingress_controller}} --> {{gw}}
-{% endraw %}
+  {{ingress_controller}} --> {{gw}}{% endraw %}
 ```
 
 An example FAST template that might represent a common pattern in an infrastructure:
 
-```
-{% raw %}
-parameters:
+```yaml
+{% raw %}parameters:
   gw: nginx
   api: PaymentsAPI
   static_files: ShoppingCartWebClient
@@ -238,6 +233,5 @@ template: |
     {{gw}} --> {{static_files}}
     {{api}} --> {{auth_backend}}
     {{auth_backend}} --> {{mgmt_db}}
-    {{ingress_controller}} --> {{gw}}
-{% endraw %}
+    {{ingress_controller}} --> {{gw}}{% endraw %}
 ```
