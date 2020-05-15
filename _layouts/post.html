@@ -17,9 +17,7 @@
           <a>&larr; Previous</a>
         {% endif %}
       </span>
-      <span>
-        <a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a>
-      </span>
+
       <span style="float: right;">
         {% if page.next %}
           <a href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">Next &rarr;</a>
@@ -29,19 +27,5 @@
       </span>
       </nav>
     </div>
-    <div id="tags">
-      <br>
-      {% unless page.tags == empty %}
-        Tags: 
-        <ul style="display: inline; padding-left: 10px;">
-        {% assign tags_list = page.tags %}
-        {% include JB/tags_list %}
-        </ul>
-      {% endunless %}
-    </div>
-  </section>
-  <section>
-    {% include JB/comments %}
   </section>
 </div>
-
