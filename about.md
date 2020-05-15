@@ -6,9 +6,10 @@ permalink: /about/
 
 zinkem is Matthew Zinke, a Software Engineeer working in Product Management at F5.
 
-views expressed in this blog do not represent anyone other than the author.
+Views expressed in this blog do not represent anyone other than the author.
 
 ---------
+
 
 [icrdk](https://github.com/f5devcentral/f5-icontrollx-dev-kit/)
 
@@ -19,6 +20,7 @@ views expressed in this blog do not represent anyone other than the author.
 [npm](https://www.npmjs.com/package/@f5devcentral/f5-fast-core)
 
 ----------
+
 
 [ircserv](https://github.com/zinkem/ircserv)
 [npm](https://www.npmjs.com/package/ircserv)
