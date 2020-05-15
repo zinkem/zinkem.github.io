@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default 
 title: First Post!
 date:   2019-05-26 14:16:00 -0700
 ---
