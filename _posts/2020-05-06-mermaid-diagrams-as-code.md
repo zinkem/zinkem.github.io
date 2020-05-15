@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Mermaid Diagrams
 date:   2020-05-06 21:44:37 -0700
 ---

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Docker Janitorial
 date:   2020-05-14 17:58:00 -0700
 ---
