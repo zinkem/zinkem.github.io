@@ -196,12 +196,12 @@ graph LR
 We could template one of these modules if it is variable, such as a database:
 
 ```
-{{=<% %>=}}
+{% raw %}
 graph LR
   module1 --> module2
   module2 --> {{database}}
   module3 --> {{database}}
-<%={{ }}=%>
+{% endraw %}
 ```
 
 This affords us a visual representation of your replacable modules, and the module structure itself. That can be quickly used in a documentation repository.
@@ -209,7 +209,7 @@ This affords us a visual representation of your replacable modules, and the modu
 We could map out an entire service with mermaid, easily updating the visual documentation when a part is swapped out:
 
 ```
-{{=<% %>=}}
+{% raw %}
 graph LR
   {{gw}} --> {{api}}
   {{api}} --> {{database}}
@@ -217,13 +217,13 @@ graph LR
   {{nginx}} --> {{auth_backend}}
   {{auth_backend}} --> {{mgmt_db}}
   {{ingress_controller}} --> {{gw}}
-<%={{ }}=%>
+{% endraw %}
 ```
 
 An example FAST template that might represent a common pattern in an infrastructure:
 
 ```
-{{=<% %>=}}
+{% raw %}
 parameters:
   gw: nginx
   api: PaymentsAPI
@@ -239,5 +239,5 @@ template: |
     {{api}} --> {{auth_backend}}
     {{auth_backend}} --> {{mgmt_db}}
     {{ingress_controller}} --> {{gw}}
-<%={{ }}=%>
+{% endraw %}
 ```
