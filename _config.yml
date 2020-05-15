@@ -24,8 +24,8 @@ twitter_username: zinkemp
 github_username:  zinkem
 
 # Build settings
-markdown: kramdown
-theme: minima
+markdown: CommonMarkGhPages
+theme: midnight
 plugins:
   - jekyll-feed
 
