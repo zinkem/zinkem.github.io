@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Docker Janitorial
-date:   2020-05-15 00:58:00 -0700
+date:   2020-05-14 17:58:00 -0700
 ---
 
 # Cleaning up after docker
