@@ -10,8 +10,9 @@ date:   2020-05-06 21:44:37 -0700
 
 Mermaid is a great tool for creating quick diagrams with text.
 It has been getting features and in recent months has improved greatly.
+There is also a great [VScode extension](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid) for rendering mermaid into markdown.
 
-I use this tool to generate simple diagrams, often using simple bash commands on lists or files. Here we'll explore a way to create a diagram of your code, and represent it as a mermaid script. diagrams as code, it's a coincidence (albeit a useful use case) our diagram is also of our code.
+I use this tool to generate simple diagrams, often starting from simple bash commands on lists of files. Here we'll explore a way to create a diagram of your code, and represent it as a mermaid script. diagrams as code, it's a coincidence (albeit a useful use case) our diagram is also of our code.
 
 ```sh
 grep 'require(' **/*.js
@@ -20,6 +21,10 @@ grep 'require(' **/*.js
 When done on the `request` npm module, we get something like this:
 
 ```sh
+
+$ npm install request
+$ cd node_modules/request
+$ grep 'require(' **/*.js
 index.js:var extend = require('extend')
 index.js:var cookies = require('./lib/cookies')
 index.js:var helpers = require('./lib/helpers')
@@ -30,47 +35,9 @@ lib/auth.js:var helpers = require('./helpers')
 lib/cookies.js:var tough = require('tough-cookie')
 lib/har.js:var fs = require('fs')
 lib/har.js:var qs = require('querystring')
-lib/har.js:var validate = require('har-validator')
-lib/har.js:var extend = require('extend')
-lib/hawk.js:var crypto = require('crypto')
-lib/helpers.js:var jsonSafeStringify = require('json-stringify-safe')
-lib/helpers.js:var crypto = require('crypto')
-lib/helpers.js:var Buffer = require('safe-buffer').Buffer
-lib/multipart.js:var uuid = require('uuid/v4')
-lib/multipart.js:var CombinedStream = require('combined-stream')
-lib/multipart.js:var isstream = require('isstream')
-lib/multipart.js:var Buffer = require('safe-buffer').Buffer
-lib/oauth.js:var url = require('url')
-lib/oauth.js:var qs = require('qs')
-lib/oauth.js:var caseless = require('caseless')
-lib/oauth.js:var uuid = require('uuid/v4')
-lib/oauth.js:var oauth = require('oauth-sign')
-lib/oauth.js:var crypto = require('crypto')
-lib/oauth.js:var Buffer = require('safe-buffer').Buffer
-lib/querystring.js:var qs = require('qs')
-lib/querystring.js:var querystring = require('querystring')
-lib/redirect.js:var url = require('url')
-lib/tunnel.js:var url = require('url')
-lib/tunnel.js:var tunnel = require('tunnel-agent')
-request.js:var http = require('http')
-request.js:var https = require('https')
-request.js:var url = require('url')
-request.js:var util = require('util')
-request.js:var stream = require('stream')
-request.js:var zlib = require('zlib')
-request.js:var aws2 = require('aws-sign2')
-request.js:var aws4 = require('aws4')
-request.js:var httpSignature = require('http-signature')
-request.js:var mime = require('mime-types')
-request.js:var caseless = require('caseless')
-request.js:var ForeverAgent = require('forever-agent')
-request.js:var FormData = require('form-data')
-request.js:var extend = require('extend')
-request.js:var isstream = require('isstream')
-request.js:var isTypedArray = require('is-typedarray').strict
-request.js:var helpers = require('./lib/helpers')
-request.js:var cookies = require('./lib/cookies')
-request.js:var getProxyFromURI = require('./lib/getProxyFromURI')
+
+                   ...
+
 request.js:var Querystring = require('./lib/querystring').Querystring
 request.js:var Har = require('./lib/har').Har
 request.js:var Auth = require('./lib/auth').Auth
@@ -81,24 +48,33 @@ request.js:var Redirect = require('./lib/redirect').Redirect
 request.js:var Tunnel = require('./lib/tunnel').Tunnel
 request.js:var now = require('performance-now')
 request.js:var Buffer = require('safe-buffer').Buffer
+$
 ```
 
 This is a list of all of requests dependencies, inner and outer.
-Attentive readers will observe request is fairly well organized.
-Internal dependencies are mainly used by request.js and index, the graph of dependencies is fairly flat.
+It is a tightly scoped and well organized module.
+Internal dependencies are mainly used by request.js and index.js, the graph of dependencies is fairly flat.
 
-If we examine the lines, we can see that `request.js`, for example, has a depency on `./lib/oauth`, among others.
+If we examine the lines, we can see that `request.js`, for example, has a depency on `./lib/oauth`.
 
 ```sh
 request.js:var OAuth = require('./lib/oauth').OAuth
 ```
 
-What we want is to translate these lines into mermaid.js commands.
+What we want is to translate these lines into mermaid.js graph syntax.
 
+```
 request.js --> './lib/oauth'
+```
 
-':var OAuth = require(' becomes '-->' and the remainder of the string is truncated.
-Evertying between the colon and the word 'require' is fairly arbitrary.
+`:var OAuth = require(` becomes ` --> ` and the remainder of the string is truncated.
+Everything between the colon and the word 'require' is fairly arbitrary.
+
+The following script can make this transformation.
+This can be useful for diving into a new project and getting a quick overview of the structure, or communicating it to other developers.
+There may be a surefire way to parse this information from the code, but its worth the time it takes to write a script to handle this kind of thing, as it can be placed in an integration step and documentation can be updated when the code is.
+
+In fact, this snippet might be useful to you right now to get started translating your javascript modules into architectural diagrams.
 
 ```JavaScript
 /*
@@ -137,7 +113,7 @@ Save the above code as `translate.js`.
 grep 'require(' **/*.js | node translate.js
 ```
 
-Running the line above yields this output:
+Running the line above yields this output, which can be copied into VScode and previewed:
 
 ```mermaid
 graph LR
@@ -205,8 +181,7 @@ graph LR
   './request.js' --> 'safe-buffer'
 ```
 
-This can be useful for diving into a new project and getting a quick overview of
-the structure. Mermaid diagrams can also be templated, and common code structures
+Mermaid diagrams can also be templated, and common code structures
 can be easily mapped to mermaid diagrams.
 
 Consider the following exxample:
@@ -221,10 +196,12 @@ graph LR
 We could template one of these modules if it is variable, such as a database:
 
 ```
+{{=<% %>=}}
 graph LR
   module1 --> module2
   module2 --> {{database}}
   module3 --> {{database}}
+<%={{ }}=%>
 ```
 
 This affords us a visual representation of your replacable modules, and the module structure itself. That can be quickly used in a documentation repository.
@@ -232,6 +209,7 @@ This affords us a visual representation of your replacable modules, and the modu
 We could map out an entire service with mermaid, easily updating the visual documentation when a part is swapped out:
 
 ```
+{{=<% %>=}}
 graph LR
   {{gw}} --> {{api}}
   {{api}} --> {{database}}
@@ -239,11 +217,13 @@ graph LR
   {{nginx}} --> {{auth_backend}}
   {{auth_backend}} --> {{mgmt_db}}
   {{ingress_controller}} --> {{gw}}
+<%={{ }}=%>
 ```
 
 An example FAST template that might represent a common pattern in an infrastructure:
 
 ```
+{{=<% %>=}}
 parameters:
   gw: nginx
   api: PaymentsAPI
@@ -259,4 +239,5 @@ template: |
     {{api}} --> {{auth_backend}}
     {{auth_backend}} --> {{mgmt_db}}
     {{ingress_controller}} --> {{gw}}
+<%={{ }}=%>
 ```
