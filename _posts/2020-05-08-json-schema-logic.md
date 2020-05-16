@@ -9,7 +9,11 @@ date: 2020-05-08 5:14:57 -0700
 
 The allOf, oneOf, and anyOf operators can be used to manipulate schema, and by proxies schema categories by applying some generic logical operations to the schema. 'oneOf' acts like xor, 'allOf' acts like and, and 'anyOf' acts like or. This can give us a sort of intuition for how schema should operate.
 
-Assume we have the following schema that we draw our categories from. These definitions represent a set of *Terminal Symbols*. The sets defined in these terminals are guaranteed to have elements that do not contain other categories. This is important, because if a grammer is built up from properly defined terminals, we can also guarantee the process will not go on forever.
+Assume we have the following schema that we draw our categories from. These
+definitions represent a set of *Terminal Symbols*. The sets defined in these
+terminals are guaranteed to have elements that do not contain other categories.
+If a schema is built up from these elements, composition of non-sensical or
+circular schemas is impossible.
 
 In recursion, these terminals would contain the base cases.
 
@@ -53,14 +57,13 @@ const schema_table = {
   }
 }
 ```
-
-We will use these categories below with JSON-schema's operators.
+These categories will be used in JSON Schema operator examples below.
 
 # oneOf
 
-exclusive choice (exclusive or)
-- only one schema is rendered, based on the passing schema
-- ambiguous parameters objects (i.e. multiple passing schemas) are errors
+exclusive choice (exclusive or, xor)
+- only one schema can be chosen, exactly one schema must pass
+- multiple passing schemas (i.e. overlapping categories) are errors
 - if no schema passes, this is a validation error
 
 ```javascript
@@ -73,7 +76,9 @@ const choice_schema = {
 }
 ```
 
-We can use any schemas we'd like in the one of, however if two schemas have overlapping sets, the overlap will be disallowed.
+JSON Schema validators do not limit the schemas that can be listed in a oneOf,
+however if two schemas describe overlapping sets, the intersection of those sets
+will be disallowed.
 
 In practice, the matching reference type can be used to provide a form of reflection to the caller: based on which schema validates, I can choose a behavior. oneOf provides a guard against ambiguous schema, this can be frustating for the user if they recieve multiple validation errors for a particular input. It may not be clear how to change the input to make it pass only one schema.
 

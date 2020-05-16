@@ -6,7 +6,7 @@ date:   2020-05-07 12:58:00 -0700
 
 # Equivalent Schema
 
-In an earlier post, [Categories]({% post_url 2010-07-21-name-of-post %}) were
+In an earlier post, [Categories]({% post_url 2020-05-06-json-schema-categories %}) were
 introduced. Every schema desribes some Category of JSON objects. Schemas that
 describe the same Categories, or validation sets, are said to be equivalent.
 
