@@ -134,8 +134,9 @@ the correct schema and the user inherits the frustration.
 Which of these schemas actually gives be the behavior I want? What the heck do
 these errors even say?
 
-Some of these problems can be alleviated by the developer by properly packaging
-validation errors in an easier to read manner than the verbatim validation error.
+Some of these problems can be alleviated in development by properly packaging
+validation errors in an easier to read manner than a printout of the error,
+verbatim from the validator.
 It is not always transparent to the developer *who* will be using their software,
 however, and shortcuts are often taken if the end user can be taught to read the
 errors.
@@ -160,8 +161,9 @@ user can be provided a different error message that enumerates acceptable
 discriminator values.
 
 The discriminator names the Cateogory or validation process that let it through,
-allowing the developer to branch on the discriminator property alone and create
-new categories.
+allowing the developer to branch on the discriminator property alone, also
+enabling the creation of new categories for the service to use at other critical
+branch points.
 
 Mutual exclusivity of sets:
   - Responsibility of the schema author
@@ -209,7 +211,7 @@ schemas.
 
 Represents the intersection of all listed schemas.
 
-*impossible!*
+*Impossible!*
 ```javascript
 const impossible_required_schema = {
   allOf: [
@@ -219,7 +221,7 @@ const impossible_required_schema = {
   ]
 }
 ```
-Schemas listed in an "allOf" must share a single possible JSON type, since they
+Schemas listed in an `allOf` must share a single possible JSON type, since they
 must pass all of the schemas listed in the array. This is a logical AND applied
 to categories.
 ```javascript
@@ -244,15 +246,18 @@ This allows 2, 3, 5, and 13. An intersection of sets. Inverse of set defined by 
     - a set has no duplicates
     - is not sensitive to order, does not need to be orderable
 
-an *array* can be a *set*, a *list*, or a *tuple*
+An *array* can be a *set*, a *list*, or a *tuple*
 
-a *list* is an
+A *list* is an
   - unbounded array
   - consisting of potentially many types
   - order of types does not matter any more than the elements themselves
 
-a *tuple* is a length bounded array, with a prescribed category at each index
+A *tuple* is a length bounded array, with a prescribed category at each index
 
-a *dictionary* is an object with arbitrary keys, and values that belong to a particular category.
+A *sequence* is like a tuple, with no bound
 
-What are the most interesting ways to construct logic around these basic Categories?
+A *dictionary* is an object with arbitrary keys, and values that belong to a particular category.
+
+What are the most interesting ways to construct logic around these basic
+Categories of data?
