@@ -96,7 +96,7 @@ Applying this rule to the former schema four times produces a more elegant
 representation of the validation set.
 
 Chains of references have a similar effect as the previous nested allOf example.
-Obesrving one `$ref` chain reveals a similar rule:
+Obeserving one `$ref` chain reveals a similar rule:
 ```javascript
 {
   "definitions" : {

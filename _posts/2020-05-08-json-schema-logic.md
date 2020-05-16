@@ -69,9 +69,8 @@ These categories will be used in JSON Schema operator examples below.
 
 *Exclusive OR, XOR*
 
-Those already familiar with digital logic, or predicate logic, may already be
-aware of XOR's significance.
-All other logical operators can be built up from XOR.
+Only one schema can pass, this one is the quirkiest of the three basic
+operations.
 
 ```javascript
 const choice_schema = {
