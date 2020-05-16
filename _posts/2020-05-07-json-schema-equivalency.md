@@ -6,7 +6,9 @@ date:   2020-05-07 12:58:00 -0700
 
 # Equivalent Schema
 
-Schemas that describe the same Category, or validation set, are said to be equivalent.
+In an earlier post, [Categories]({% post_url 2010-07-21-name-of-post %}) were
+introduced. Every schema desribes some Category of JSON objects. Schemas that
+describe the same Categories, or validation sets, are said to be equivalent.
 
 Schema can contain many extraneous properties and structures that result in different descriptions of the same sets. Consider the following:
 ```json
@@ -64,9 +66,10 @@ To further confuse things, these approaches can be mixed to yield a third, equiv
   ]
 }
 ```
-We can apply many changes to a schema that do not change its category.
+We can apply many changes to a schema that do not change the validation set.
 
-Note the allOf operator can be nested ad infinitum, ad nauseum, without changing the underlying validation set:
+Note the allOf operator can be nested ad infinitum, ad nauseum, without changing
+the category it describes:
 ```json
 {
   "allOf": [{
@@ -80,7 +83,7 @@ Note the allOf operator can be nested ad infinitum, ad nauseum, without changing
   }]
 }
 ```
-No matter how many allOfs, oneOfs, anyOfs in the chain, it all reduces to:
+No matter how many allOfs in the chain, it all reduces to:
 ```json
 { "type" : "object "}
 ```
@@ -89,11 +92,11 @@ This observation produces an equivalence rule:
 ```javascript
 { "allOf": [ {} ] } === {}
 ```
-Applying this rule to the former schema four times produces a more elegant representation of the validation set. Is this a minimal representation of the validation set?
+Applying this rule to the former schema four times produces a more elegant
+representation of the validation set.
 
 Chains of references have a similar effect as the previous nested allOf example.
 Obesrving one `$ref` chain reveals a similar rule:
-
 ```javascript
 {
   "definitions" : {
@@ -126,4 +129,7 @@ Shown another way:
 ```
 No matter how many naked references we follow, the schema is unaltered.
 
-We have established that many schema representations provide equivalent validation sets, and that rules exist to remove no-ops from the schema representation. Can a canonical schema be defined for a given validation set?
+We have established that many schema representations provide equivalent
+validation sets, or categories, and that there are at least some rules we can
+follow to reduce schema to a simpler representation. Can a canonical schema be
+defined for a given category of JSON objects?
