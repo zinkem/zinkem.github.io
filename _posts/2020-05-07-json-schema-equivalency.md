@@ -133,3 +133,6 @@ We have established that many schema representations provide equivalent
 validation sets, or categories, and that there are at least some rules we can
 follow to reduce schema to a simpler representation. Can a canonical schema be
 defined for a given category of JSON objects?
+
+For more details on JSON Schema's logical operators, check out
+[Logic in JSON Schema]({% post_url 2020-05-08-json-schema-logic %}).
