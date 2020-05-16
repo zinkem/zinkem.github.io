@@ -1,14 +1,16 @@
 ---
 layout: default
 ---
-<span class="credits right">Last updated: {{ page.date }}</span>
+
 <div class="wrapper">
   <section>
     <div id="title">
       <p><img src="/assets/logo_cropped.png"><br/>{{ site.description | default: site.github.project_tagline }}</p>
       <h1>{{ page.title }}</h1>
       {% if page.subtitle %}<p>"{{ page.subtitle }}"</p>{% endif %}
-      <br><hr>
+      <br>
+      <span class="credits right">Last updated: {{ page.date }}</span>
+      <hr>
     </div>
     {{ content }}
     <hr>
