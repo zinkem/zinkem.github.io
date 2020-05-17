@@ -38,7 +38,8 @@ oneOf:
 ```
 The answer is... it depends.
 
-The inclusion of `if-then-else` clause was hotly [debated](https://github.com/json-schema-org/json-schema-spec/issues/180), and I did not understand it for some time.
+The inclusion of `if-then-else` clause was hotly [debated](https://github.com/json-schema-org/json-schema-spec/issues/180).
+I did not understand it for some time and chose not to use it.
 We see that it is basically a wrapper around an `allOf`, from the `if-then` example,
 and a `oneOf`, to provide exclusivity with the `else` schema. The comments go
 into academic debates about the nature of declarative programming, and what
@@ -52,12 +53,11 @@ My reduction assumes schema describes categories of objects, not validation proc
 evaluate lazily, preventing a potentially expensive validation on the `else`
 clause-- in my reduction, `C` will *always* be validated against.
 
-While it may be true the validation implementation is imperative today,
-processes that involve control flow metaphors prevent compatibility with
-possible near-future concurrent and parallel validation techniques. The parse
-may be top down today, but what if it is bottom up in the future?
+While it may be true ajv's validation implementation is imperative today,
+specifications that rely on control flow metaphors seem counter to the goals of
+adopting JSON Schema.
 
-By coupling the schema specificaiton process to particular tools, JSON Schema
+By coupling the schema specificaiton to particular processes, JSON Schema
 could find itself with heaps of undefined behavior.
 Behaviors like this place an extra burden on devlopers and maintainers-- tool maintainers have to support them and build around inconsistencies between tools.
 

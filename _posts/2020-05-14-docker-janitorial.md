@@ -3,7 +3,7 @@ layout: post
 title: Docker Cheatsheet
 date: 2020-05-14 17:58:00 -0700
 ---
-
+{% raw %}
 # Container Lifecycle
 
 ```
@@ -78,4 +78,5 @@ add the --volumes flag:
 $ docker system prune --volumes
 ```
 
+{% endraw %}
 [Official](https://docs.docker.com/config/pruning/)

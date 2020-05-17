@@ -135,7 +135,7 @@ $ref: nand
 ```
 Now we will run into another problem... this isn't generalizable, I need to
 repeat this idiom all over my schema, with A and B concretely defined!
-
+{% raw %}
 It would be nice to be able to pass in a reference and generate the schema
 snippet. We could template the snippet:
 ```yaml
@@ -151,8 +151,9 @@ definitions:
 $ref: nand
 ```
 This can be parameterized with a template:
+
 ```yaml
-$id: {{left_category}}_nand_{{right_category}}
+id: {{left_category}}_nand_{{right_category}}
 title: {{left_category}} nand {{right_category}}
 description: passes only when none of the sub elements pass.
 type: object
@@ -162,8 +163,9 @@ definitions:
       - anyOf:
         - $ref: {{left_category}}
         - $ref: {{right_category}}
-$ref: nand
+$ref: nand{% endraw %}
 ```
+
 Passing the following context/view:
 ```yaml
 left_category: 'schemaId#/definitions/typeA'
@@ -184,7 +186,7 @@ definitions:
         - $ref: schemaId#/definitions/typeB
 $ref: '#/definitions/nand'
 ```
-
+{% endraw %}
 References can of course be followed by the application, and loaded into the
 validator with some code. Some libraries are available to do this.
 
