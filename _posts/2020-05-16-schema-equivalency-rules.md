@@ -55,6 +55,8 @@ type | property | creates
 `object` | `properties`,`additionalProperties` | objects, dictionaries
 
 ## not
+
+The `not` property *can* be built out of logical operators, however.
 ```yaml
 not: A
 ```
@@ -64,9 +66,7 @@ oneOf:
   - {}
   - A
 ```
-The `not` property can be built out of logical operators, however.
-
-The {} represents the entire catgory of acceptable JSON Schema objects. When A
+`{}` represents the entire catgory of acceptable JSON Schema objects. When A
 is true, this will return false. When A is false, this will return true.
 
 ## if, then
@@ -216,14 +216,14 @@ $ref: '#/definitions/nand'
 References can of course be followed by the application, and loaded into the
 validator with some code. Some libraries are available to do this.
 
-[json-schema-ref-parser](https://www.npmjs.com/package/json-schema-ref-parser)
-[json-schema-traverse](https://www.npmjs.com/package/json-schema-traverse)
+* [json-schema-ref-parser](https://www.npmjs.com/package/json-schema-ref-parser)
+* [json-schema-traverse](https://www.npmjs.com/package/json-schema-traverse)
 
 Such libraries could be used to hot-load concrete category schemas into purpose
-built validation structures. Features like if-then-else could be implemented in
+built validation structures. Features like `if-then-else` could be implemented in
 such a higher level system targetting a particular domain audience and use case.
 This would ease the burden on tool builders who must support the entire
-specification. 
+specification.
 
 ---
 
