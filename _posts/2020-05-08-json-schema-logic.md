@@ -5,7 +5,6 @@ date: 2020-05-08 3:14:15 -0700
 ---
 
 # Logic expressed in JSON-Schema
-(`{ if: {}, then: {} }` considered harmful)
 
 The allOf, oneOf, and anyOf operators can be used to manipulate schema, and by proxies schema categories by applying some generic logical operations to the schema. 'oneOf' acts like xor, 'allOf' acts like and, and 'anyOf' acts like or. This can give us a sort of intuition for how schema should operate.
 

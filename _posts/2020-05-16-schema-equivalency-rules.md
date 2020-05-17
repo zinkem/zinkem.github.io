@@ -40,35 +40,34 @@ allOf:
       foo: C
 ```
 
+The properties can be broken down and the schema can then be composed ala carte.
+`properties` is an example of a type specific property that can't really be
+reduced any further.
+
+Each type, other than booleans have their own properties for defining sub-types
+and cannot be generalized.
+
+type | property | creates
+---|---|---
+`string` | `regex` | string subsets
+`number`,`integer` | `minimumValue`, `maximumValue` | bounded domains
+`array` | `items` | tuples, sequences, typed lists
+`object` | `properties`,`additionalProperties` | objects, dictionaries
+
 ## not
 ```yaml
 not: A
 ```
-reduces to
+becomes
 ```yaml
 oneOf:
-  - A
+  - {}
   - A
 ```
-This one may not be obvious, we are trying to *invert* A.
+The `not` property can be built out of logical operators, however.
 
-If we pass in an object in the A's category, it should fail.
-Lets see what happens.
-```yaml
-oneOf:
-  - PASS
-  - PASS
----
-FAIL
-```
-If we pass in something outside of A's category...
-```yaml
-oneOf:
-  - FAIL
-  - FAIL
----
-FAIL
-```
+The {} represents the entire catgory of acceptable JSON Schema objects. When A
+is true, this will return false. When A is false, this will return true.
 
 ## if, then
 ```yaml
@@ -76,7 +75,7 @@ if: A
 then: B
 ```
 reduces to
-```
+```yaml
 allOf:
   - A
   - B
@@ -96,6 +95,39 @@ oneOf:
       - B
   - C
 ```
+`{ if: {}, then: {}, else: {} }` considered harmful?
+
+The inclusion of `if-then-else` clause is debated.
+Not many tools understand it, or can parse it.
+We see that it is basically a wrapper around an `allOf`, from the `if-then` example,
+and a `oneOf`, to provide exclusivity with the `else` schema.
+
+Adding structured `if-else` logic to the schema does not break json schema, and likewise is does not increase JSON Schema's capability.
+It is more convenient for the schema author, but features like this place an
+extra burden on the tool author. The maintainer has to support an extra feature
+for their tool to work.
+
+We've seen some fracturing of the community, and the tools, in the jump from JSON Schema Draft-4 to Draft-7, where this feature was added.
+
+If JSON Schema itself manages to stay lean, fewer property features will be
+needed by the tools. Any tool is welcome to extend the schema, but the author
+of the extended schema must be prepared to support conversion to a lower level
+syntax for integration with other tools. The community of course is free to choose
+their own path, I would recommend sticking to Draft-4 while experimenting with
+the newer properties.
+
+The usefulness of specific idioms such as if-then-else cannot be denied, but the
+question is if every user of JSON Schema needs these idioms or not. I do not
+believe if-then-else is *necessary* and in some cases fosters the impression
+that there is an imperative structure to schema validation.
+
+By supporting a smaller set of homogenous and orthogonal operations, the
+complexity of specifying canonical schemas, defining schema manipulations, and
+designing domain specific idioms is more managable and can be left to domain
+experts utilizing schema composition tools.
+By packing the base specification with too many features that
+do not improve the capability of the system, we are wasting maintainence cycles
+on work that could have been used to better serve client domains effectively.
 
 ## Building NAND
 
@@ -112,7 +144,7 @@ can be built somewhere simply from `NAND`.
 Another way of saying 'not and' *and* 'not or' is 'not any of':
 ```yaml
 not:
-  - anyOf:
+  anyOf:
     - A
     - B
 ```
@@ -181,6 +213,19 @@ definitions:
 $ref: '#/definitions/nand'
 ```
 
+References can of course be followed by the application, and loaded into the
+validator with some code. Some libraries are available to do this.
+
+[json-schema-ref-parser](https://www.npmjs.com/package/json-schema-ref-parser)
+[json-schema-traverse](https://www.npmjs.com/package/json-schema-traverse)
+
+Such libraries could be used to hot-load concrete category schemas into purpose
+built validation structures. Features like if-then-else could be implemented in
+such a higher level system targetting a particular domain audience and use case.
+This would ease the burden on tool builders who must support the entire
+specification. 
+
+---
 
 Do you know of any build tools that manage and solve these problems?
 Reply on Twitter!
