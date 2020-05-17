@@ -16,7 +16,7 @@ Schema represented in YAML for convenience.
 
 Assume variables such as A, B, and C are references to Categories defined in a
 definitions table.
-For sake of brevity, example definitions table are not provided.
+For sake of brevity, the definitions table is not provided.
 
 ## object
 ```yaml
@@ -121,12 +121,13 @@ and the tools are very capable as they exist today.
 Any tool is welcome to extend the schema, but beware of ecosystem compatibility
 and potential maintainence costs when making custom modifications.
 
-The usefulness of specific idioms such as `if-then-else` cannot be denied, but
-in some cases it obscures understanding.
-Explainations like [this one](https://stackoverflow.com/questions/51539586/how-do-i-use-the-if-then-else-condition-in-json-schema) and [this one](https://json-schema.org/understanding-json-schema/reference/conditionals.html) do not inspire confidence.
+The usefulness of specific idioms such as `if-then-else` cannot be denied, it
+flattens the syntax and makes schema more ergonomic to write.
+However, it obscures understanding.
+Explainations like [this one](https://stackoverflow.com/questions/51539586/how-do-i-use-the-if-then-else-condition-in-json-schema) and [this one](https://json-schema.org/understanding-json-schema/reference/conditionals.html) left me a
+little confused.
 Discussion of *applying* schemas introduces an imperative metaphor where none
 is needed.
-Is `if-then-else` is *necessary* for all users in all domains?
 
 By supporting a carefully chosen set of homogenous operations, the
 complexity of specifying canonical schemas, defining schema manipulations, and
@@ -136,6 +137,8 @@ designing domain specific idioms is much more manageable.
 
 From a certain perspective, `NAND` is the fundamental gate. All other basic
 logical operations can be built somewhat simply from `NAND`.
+I don't know if this schema snippet is particularly useful, it might be, but the
+exercise demonstrates that complex operations are possible with few operations.
 
 `NAND` Truth Table
 
@@ -232,7 +235,10 @@ specification.
 
 ---
 
+Is `if-then-else` *necessary* for all users in all domains?
+
 Do you know of any build tools that manage and solve these problems?
+
 Reply on Twitter!
 
 <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">Summary of Logical Operators in JSON Schema, with examples of Category Construction <a href="https://twitter.com/hashtag/JSON?src=hash&amp;ref_src=twsrc%5Etfw">#JSON</a> <a href="https://twitter.com/hashtag/API?src=hash&amp;ref_src=twsrc%5Etfw">#API</a> <a href="https://t.co/8nvx4w2JVb">https://t.co/8nvx4w2JVb</a></p>&mdash; Matthew (@zinkemp) <a href="https://twitter.com/zinkemp/status/1261720285050355712?ref_src=twsrc%5Etfw">May 16, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
