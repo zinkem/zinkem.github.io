@@ -1,10 +1,8 @@
 ---
 layout: post
-title: JSON Schema Equivalency
+title: Equivalency of JSON Schemas
 date:   2020-05-07 12:58:00 -0700
 ---
-
-# Equivalent Schema
 
 In an earlier post, [Categories]({% post_url 2020-05-06-json-schema-categories %}) were
 introduced. Every schema desribes some Category of JSON objects. Schemas that

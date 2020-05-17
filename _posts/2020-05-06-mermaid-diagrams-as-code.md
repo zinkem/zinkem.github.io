@@ -1,25 +1,32 @@
 ---
 layout: post
-title: Mermaid Diagrams
-date:   2020-05-06 21:44:37 -0700
+title: Mermaid Diagrams (as Code)
+date: 2020-05-06 21:44:37 -0700
 ---
-
-# mermaid, diagrams as code
 
 [mermaid.js](https://mermaid-js.github.io/)
 
-Mermaid is a great tool for creating quick diagrams with text.
-It has been getting features and in recent months has improved greatly.
+Mermaid is a handy tool for creating diagrams with text quickly.
+Much work has been put into it lately as more objects and diagrams have been
+added.
 There is also a great [VScode extension](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid) for rendering mermaid into markdown.
 
-I use this tool to generate simple diagrams, often starting from simple bash commands on lists of files. Here we'll explore a way to create a diagram of your code, and represent it as a mermaid script. diagrams as code, it's a coincidence (albeit a useful use case) our diagram is also of our code.
+It can be extremely useful for visualizing and documenting source code in very
+spartan environments.
+Starting from simple bash commands with lists of files, patterns in several
+languages can be grepped for and processed.
+
+This example shows a process for getting a high level overview of a new codebase
+in javascript. `npm ls` may show the module structure, but I am unaware of
+any way to get a quick and dirty picture of how files *within* a module are
+related without loading up an expensive IDE.
+
+For Node.js modules, they use require. We can grep for `require(`:
 
 ```sh
 grep 'require(' **/*.js
 ```
-
 When done on the `request` npm module, we get something like this:
-
 ```sh
 
 $ npm install request
@@ -50,38 +57,33 @@ request.js:var now = require('performance-now')
 request.js:var Buffer = require('safe-buffer').Buffer
 $
 ```
-
-This is a list of all of requests dependencies, inner and outer.
+This is a list of all of `request`s internal dependencies, as well as which
+files depend on external APIs.
 It is a tightly scoped and well organized module.
-Internal dependencies are mainly used by request.js and index.js, the graph of dependencies is fairly flat.
+Internal dependencies are mainly used by request.js and index.js, the graph of
+dependencies is fairly flat.
 
-If we examine the lines, we can see that `request.js`, for example, has a depency on `./lib/oauth`.
-
+If we examine the lines, we can see that `request.js`, for example, has an
+external depency on `./lib/oauth`.
 ```sh
 request.js:var OAuth = require('./lib/oauth').OAuth
 ```
-
 What we want is to translate these lines into mermaid.js graph syntax.
-
 ```
 request.js --> './lib/oauth'
 ```
-
 `:var OAuth = require(` becomes ` --> ` and the remainder of the string is truncated.
 Everything between the colon and the word 'require' is fairly arbitrary.
 
 The following script can make this transformation.
 This can be useful for diving into a new project and getting a quick overview of the structure, or communicating it to other developers.
-There may be a surefire way to parse this information from the code, but its worth the time it takes to write a script to handle this kind of thing, as it can be placed in an integration step and documentation can be updated when the code is.
-
-In fact, this snippet might be useful to you right now to get started translating your javascript modules into architectural diagrams.
-
+There may be a surefire way to parse this information from the code, but this
+will yield 80% of the reslts with 20% of the effort.
 ```javascript
 /*
 * this script takes the output of : grep 'require(' and turns it into a
 * mermaid dependency graph for the request module  
-* this will not work on all npm modules, but it might be close enough to cover
-* your use case with low effort...
+* this will not work on all npm modules, but it might be a good start
 */
 
 const buffer = [];
@@ -106,15 +108,11 @@ process.stdin.on('end', () => {
     })
 })
 ```
-
 Save the above code as `translate.js`.
-
 ```sh
 grep 'require(' **/*.js | node translate.js
 ```
-
 Running the line above yields this output, which can be copied into VScode and previewed:
-
 ```mermaid
 graph LR
   './foo.js' --> '
@@ -180,32 +178,26 @@ graph LR
   './request.js' --> 'performance-now'
   './request.js' --> 'safe-buffer'
 ```
-
 Mermaid diagrams can also be templated, and common code structures
 can be easily mapped to mermaid diagrams.
 
 Consider the following exxample:
-
 ```
 graph LR
   module1 --> module2
   module2 --> module4
   module3 --> module4
 ```
-
 We could template one of these modules if it is variable, such as a database:
-
 ```
 {% raw %}graph LR
   module1 --> module2
   module2 --> {{database}}
   module3 --> {{database}}{% endraw %}
 ```
-
-This affords us a visual representation of your replacable modules, and the module structure itself. That can be quickly used in a documentation repository.
+This affords us a visual representation of replacable modules, and the module structure itself. That can be quickly used in a documentation repository.
 
 We could map out an entire service with mermaid, easily updating the visual documentation when a part is swapped out:
-
 ```
 {% raw %}graph LR
   {{gw}} --> {{api}}
@@ -215,9 +207,7 @@ We could map out an entire service with mermaid, easily updating the visual docu
   {{auth_backend}} --> {{mgmt_db}}
   {{ingress_controller}} --> {{gw}}{% endraw %}
 ```
-
 An example FAST template that might represent a common pattern in an infrastructure:
-
 ```yaml
 {% raw %}parameters:
   gw: nginx

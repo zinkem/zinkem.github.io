@@ -1,12 +1,10 @@
 ---
 layout: post
-title: JSON Schema Categories
+title: Categories in JSON schema
 date:   2020-05-07 12:58:00 -0700
 ---
 
-# Categories in JSON schema.
-
-JSON-schema is an invluable tool for providing input validation to rest APIs and other JavaScript processes. It provides a hierarchical way of organizing validation on parts of JSON objects, and builds those up into a top level schema for parsing whole objects. All objects in schema are themselves valid JSON-schema on their own.
+JSON-schema is an invaluable tool for providing input validation to rest APIs and other JavaScript processes. It provides a hierarchical way of organizing validation on parts of JSON objects, and builds those up into a top level schema for parsing whole objects. All objects in schema are themselves valid JSON-schema on their own.
 
 So what exactly is JSON-Schema descibing? JSON objects, right?
 
