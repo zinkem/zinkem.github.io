@@ -163,7 +163,7 @@ definitions:
       - anyOf:
         - $ref: {{left_category}}
         - $ref: {{right_category}}
-$ref: nand{% endraw %}
+$ref: nand
 ```
 
 Passing the following context/view:
