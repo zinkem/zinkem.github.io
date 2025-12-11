@@ -22,17 +22,11 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js"></script>
   </head>
   <body>
-      <div id="header" style="float:right;">
-        <nav>
-        <li class="fork" style="margin-right:16px;"><a href="/">{{site.title}}</a></li>
-        <li class="fork" style="margin-right:16px;"><a href="{{ site.github.repository_url }}">View On GitHub</a></li>
-        {% if site.show_downloads %}
-          <li class="downloads"><a href="{{ site.github.zip_url }}">ZIP</a></li>
-          <li class="downloads"><a href="{{ site.github.tar_url }}">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        {% endif %}
-        </nav>
-      </div><!-- end header -->
+    <nav class="site-nav">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/about/" class="nav-link">About</a>
+      <a href="{{ site.github.repository_url }}" class="nav-link">GitHub</a>
+    </nav>
     <div class="wrapper">
       <section style="margin: 0px;">
 

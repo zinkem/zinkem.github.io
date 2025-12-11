@@ -3,6 +3,24 @@
 
 @import "jekyll-theme-midnight";
 
+/* Site navigation */
+.site-nav {
+  text-align: right;
+  padding: 1rem 2rem;
+}
+
+.nav-link {
+  color: #707880;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #4fc1ff;
+}
+
 code {
   color: #909090;
 }
