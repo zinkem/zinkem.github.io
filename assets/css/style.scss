@@ -114,15 +114,19 @@ code {
 .post-list {
   list-style: none;
   padding: 0;
+  overflow: hidden; /* contain the sliding cards */
 }
 
 .post-list li {
+  position: relative;
   margin-bottom: 1.5rem;
   padding: 1rem 1.25rem;
   background: rgba(10, 25, 40, 0.5);
   border-left: 3px solid #5b8a9a;
   border-radius: 0 4px 4px 0;
   transition: all 0.2s ease;
+  transform-origin: left center;
+  will-change: transform, opacity;
 }
 
 .post-list li:hover {

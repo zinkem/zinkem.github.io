@@ -68,17 +68,17 @@
             link.style.color = '#a8dff0';
             link.style.textShadow = '0 0 20px rgba(126, 200, 227, 0.8)';
 
-            // Phase 2: swipe left and fade
+            // Phase 2: swipe left off screen
             setTimeout(function() {
-              card.style.transition = 'all 0.12s cubic-bezier(0.4, 0, 1, 1)';
-              card.style.transform = 'translateX(-60px) scale(0.95)';
+              card.style.transition = 'transform 0.15s cubic-bezier(0.4, 0, 1, 1), opacity 0.1s ease-out';
+              card.style.transform = 'translateX(-120%) scale(0.9)';
               card.style.opacity = '0';
             }, 100);
 
             // Navigate
             setTimeout(function() {
               window.location.href = href;
-            }, 220);
+            }, 250);
           });
         });
       });
