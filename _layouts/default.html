@@ -48,33 +48,37 @@
     {% endif %}
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Post link click animation - highlight, grow, overshoot left
-        document.querySelectorAll('.post-link').forEach(function(link) {
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            var href = this.href;
-            var el = this;
+        // Animate the whole post card on click
+        document.querySelectorAll('.post-list li').forEach(function(card) {
+          card.style.cursor = 'pointer';
 
-            // Make sure transforms work
-            el.style.display = 'inline-block';
+          card.addEventListener('click', function(e) {
+            var link = this.querySelector('.post-link');
+            if (!link) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+            var href = link.href;
 
             // Phase 1: highlight and grow
-            el.style.transition = 'all 0.08s ease-out';
-            el.style.transform = 'scale(1.08)';
-            el.style.color = '#a8dff0';
-            el.style.textShadow = '0 0 25px rgba(126, 200, 227, 0.9)';
+            this.style.transition = 'all 0.1s ease-out';
+            this.style.transform = 'scale(1.02)';
+            this.style.borderLeftColor = '#7ec8e3';
+            this.style.boxShadow = '0 0 30px rgba(126, 200, 227, 0.4)';
+            link.style.color = '#a8dff0';
+            link.style.textShadow = '0 0 20px rgba(126, 200, 227, 0.8)';
 
-            // Phase 2: overshoot left and fade
+            // Phase 2: swipe left and fade
             setTimeout(function() {
-              el.style.transition = 'all 0.07s ease-in';
-              el.style.transform = 'translateX(-40px) scale(0.9)';
-              el.style.opacity = '0';
-            }, 80);
+              card.style.transition = 'all 0.12s cubic-bezier(0.4, 0, 1, 1)';
+              card.style.transform = 'translateX(-60px) scale(0.95)';
+              card.style.opacity = '0';
+            }, 100);
 
-            // Navigate after animation
+            // Navigate
             setTimeout(function() {
               window.location.href = href;
-            }, 150);
+            }, 220);
           });
         });
       });
