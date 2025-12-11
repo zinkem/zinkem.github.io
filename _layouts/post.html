@@ -2,36 +2,29 @@
 layout: default
 ---
 
-<div class="wrapper">
-  <section style="margin: 0px;">
-    <div id="title">
-      <p><img src="/assets/logo_cropped.png"><br/>{{ site.description | default: site.github.project_tagline }}</p>
-      <h1>{{ page.title }}</h1>
-      {% if page.subtitle %}<p>"{{ page.subtitle }}"</p>{% endif %}
-      <br>
-      <hr>
-      <span class="credits right">Last updated: {{ page.date }}</span>
-    </div>
-    {{ content }}
-    <hr>
-    <nav>
-    <div style="text-align: center;">
-      <span style="float: left;">
-        {% if page.previous %}
-          <a href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a>
-        {% else %}
-          <a>&larr; Previous</a>
-        {% endif %}
-      </span>
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">
+      {{ page.date | date: "%b %-d, %Y" }}
+      {% if page.project %}<span class="post-project">{{ page.project }}</span>{% endif %}
+    </p>
+  </header>
 
-      <span style="float: right;">
-        {% if page.next %}
-          <a href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">Next &rarr;</a>
-        {% else %}
-          <a>Next &rarr;</a>
-        {% endif %}
-      </span>
-      </nav>
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <nav class="post-nav">
+    <div class="nav-prev">
+      {% if page.previous %}
+        <a href="{{ page.previous.url | relative_url }}">&larr; {{ page.previous.title | truncate: 40 }}</a>
+      {% endif %}
     </div>
-  </section>
-</div>
+    <div class="nav-next">
+      {% if page.next %}
+        <a href="{{ page.next.url | relative_url }}">{{ page.next.title | truncate: 40 }} &rarr;</a>
+      {% endif %}
+    </div>
+  </nav>
+</article>

@@ -3,32 +3,34 @@
 
 @import "jekyll-theme-midnight";
 
-/* Typography - refined monospace */
+/* Typography - monospace for headings, readable for body */
 body {
-  font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
   font-size: 15px;
   line-height: 1.7;
-  letter-spacing: 0.01em;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6,
+.hero-title, .hero-tagline,
+.site-nav, .post-meta {
   font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-  font-weight: 600;
   letter-spacing: 0.02em;
 }
 
-/* Site navigation - matching the image colors */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+/* Site navigation - compact */
 .site-nav {
   text-align: right;
-  padding: 1rem 2rem;
-  background: linear-gradient(180deg, rgba(10, 25, 40, 0.9) 0%, transparent 100%);
+  padding: 0.5rem 1.5rem;
 }
 
 .nav-link {
   color: #5b8a9a;
   text-decoration: none;
-  margin-left: 1.5rem;
-  font-size: 0.85rem;
+  margin-left: 1.25rem;
+  font-size: 0.75rem;
   text-transform: lowercase;
   letter-spacing: 0.1em;
   transition: all 0.2s ease;
@@ -70,12 +72,10 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
-    180deg,
-    rgba(10, 25, 40, 0.3) 0%,
-    rgba(10, 25, 40, 0.6) 50%,
-    rgba(10, 25, 40, 0.8) 100%
-  );
+  /* Vignette + darkening gradient */
+  background:
+    radial-gradient(ellipse at center, transparent 0%, rgba(10, 25, 40, 0.7) 100%),
+    linear-gradient(180deg, rgba(10, 25, 40, 0.4) 0%, rgba(10, 25, 40, 0.7) 60%, rgba(10, 25, 40, 0.95) 100%);
 }
 
 .hero-title {
@@ -182,4 +182,100 @@ a {
 a:hover {
   color: #a8dff0;
   text-shadow: 0 0 8px rgba(126, 200, 227, 0.4);
+}
+
+/* Article styling */
+.post {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.post-content {
+  color: #c5c8c6;
+}
+
+.post-content h2 {
+  color: #7ec8e3;
+  margin-top: 2rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(126, 200, 227, 0.2);
+}
+
+.post-content h3 {
+  color: #a8dff0;
+  margin-top: 1.5rem;
+}
+
+.post-content code {
+  background: rgba(10, 25, 40, 0.6);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.post-content pre {
+  background: rgba(10, 25, 40, 0.7);
+  border-left: 3px solid #5b8a9a;
+  border-radius: 0 4px 4px 0;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.post-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.post-content th,
+.post-content td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(91, 138, 154, 0.3);
+  text-align: left;
+}
+
+.post-content th {
+  background: rgba(10, 25, 40, 0.5);
+  color: #7ec8e3;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.85rem;
+}
+
+.post-content blockquote {
+  border-left: 3px solid #5b8a9a;
+  margin: 1rem 0;
+  padding-left: 1rem;
+  color: #8a9a9a;
+  font-style: italic;
+}
+
+/* Post navigation */
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(91, 138, 154, 0.3);
+  font-size: 0.85rem;
+}
+
+.post-nav a {
+  color: #5b8a9a;
+}
+
+.post-nav a:hover {
+  color: #7ec8e3;
+}
+
+.nav-prev, .nav-next {
+  max-width: 45%;
+}
+
+.nav-next {
+  text-align: right;
 }
