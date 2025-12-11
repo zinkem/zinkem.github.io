@@ -6,3 +6,120 @@
 code {
   color: #909090;
 }
+
+/* Hero section with logo and title overlay */
+.hero {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.hero-logo {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.hero-text {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  color: #c5c8c6;
+  text-shadow:
+    0 0 10px rgba(79, 193, 255, 0.5),
+    0 0 20px rgba(79, 193, 255, 0.3),
+    0 0 40px rgba(79, 193, 255, 0.2),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.hero-tagline {
+  font-size: 1.1rem;
+  color: #8abeb7;
+  text-shadow:
+    0 0 8px rgba(138, 190, 183, 0.4),
+    1px 1px 2px rgba(0, 0, 0, 0.6);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Post list styling */
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list li {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(30, 30, 30, 0.6);
+  border-left: 3px solid #4fc1ff;
+  border-radius: 0 4px 4px 0;
+  transition: all 0.2s ease;
+}
+
+.post-list li:hover {
+  background: rgba(40, 40, 40, 0.8);
+  border-left-color: #8abeb7;
+  box-shadow: 0 0 15px rgba(79, 193, 255, 0.2);
+}
+
+.post-list h3 {
+  margin: 0 0 0.3rem 0;
+}
+
+.post-list a.post-link {
+  color: #81a2be;
+  text-decoration: none;
+  text-shadow: 0 0 8px rgba(129, 162, 190, 0.3);
+}
+
+.post-list a.post-link:hover {
+  color: #4fc1ff;
+  text-shadow: 0 0 12px rgba(79, 193, 255, 0.5);
+}
+
+.post-meta {
+  color: #707880;
+  font-size: 0.85rem;
+}
+
+/* Project badge */
+.post-project {
+  display: inline-block;
+  font-size: 0.75rem;
+  background: rgba(79, 193, 255, 0.15);
+  color: #4fc1ff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+}
+
+/* Post page styling */
+.post-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #373b41;
+}
+
+.post-title {
+  color: #c5c8c6;
+  text-shadow:
+    0 0 10px rgba(79, 193, 255, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Links with subtle glow */
+a {
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  text-shadow: 0 0 8px rgba(79, 193, 255, 0.4);
+}
