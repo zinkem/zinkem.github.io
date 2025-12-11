@@ -1,0 +1,11 @@
+title: blog post template
+description: blog post on zinkem.github.io
+contentMediaType: application/markdown
+template: |
+  ---
+  layout: post
+  title: {{title}}
+  date: {{date}}
+  ---
+
+  {{content}}

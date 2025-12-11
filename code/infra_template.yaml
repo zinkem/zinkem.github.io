@@ -1,0 +1,15 @@
+parameters:
+  gw: nginx
+  api: PaymentsAPI
+  static_files: ShoppingCartWebClient
+  auth_backend: OAuth
+  ingress_controller: BigIpVE
+  mgmt_db: MongoDB
+template: |
+  graph LR
+    {{gw}} --> {{api}}
+    {{api}} --> {{database}}
+    {{gw}} --> {{static_files}}
+    {{api}} --> {{auth_backend}}
+    {{auth_backend}} --> {{mgmt_db}}
+    {{ingress_controller}} --> {{gw}}

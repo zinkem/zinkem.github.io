@@ -1,0 +1,15 @@
+parameters:
+  left_category: 'schemaId#/definitions/typeA'
+  right_category: 'schemaId#/definitions/typeB'
+template: |
+  $id: {{left_category}}_nand_{{right_category}}
+  title: {{left_category}} nand {{right_category}}
+  description: passes only when none of the sub elements pass.
+  type: object
+  definitions:
+    nand:
+      not:
+        - anyOf:
+          - $ref: {{left_category}}
+          - $ref: {{right_category}}
+  $ref: '#/definitions/nand'
