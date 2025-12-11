@@ -17,7 +17,7 @@
 title: grand reified theory
 email: zinkem@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-    concept to concrete
+    Retrospectives on building with AI - growing shared language one conversation at a time
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: zinkemp
@@ -40,3 +40,5 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+# #2fb718
