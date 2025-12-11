@@ -47,30 +47,35 @@
       </script>
     {% endif %}
     <script>
-      // Post link click animation - highlight, grow, overshoot left
-      document.querySelectorAll('.post-link').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          var href = this.href;
-          var el = this;
+      document.addEventListener('DOMContentLoaded', function() {
+        // Post link click animation - highlight, grow, overshoot left
+        document.querySelectorAll('.post-link').forEach(function(link) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var href = this.href;
+            var el = this;
 
-          // Add animation class
-          el.style.transition = 'all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-          el.style.transform = 'scale(1.05)';
-          el.style.color = '#a8dff0';
-          el.style.textShadow = '0 0 20px rgba(126, 200, 227, 0.8)';
+            // Make sure transforms work
+            el.style.display = 'inline-block';
 
-          // Overshoot left and exit
-          setTimeout(function() {
-            el.style.transition = 'all 0.1s cubic-bezier(0.6, -0.28, 0.735, 0.045)';
-            el.style.transform = 'translateX(-30px) scale(0.95)';
-            el.style.opacity = '0';
-          }, 80);
+            // Phase 1: highlight and grow
+            el.style.transition = 'all 0.08s ease-out';
+            el.style.transform = 'scale(1.08)';
+            el.style.color = '#a8dff0';
+            el.style.textShadow = '0 0 25px rgba(126, 200, 227, 0.9)';
 
-          // Navigate after animation
-          setTimeout(function() {
-            window.location.href = href;
-          }, 150);
+            // Phase 2: overshoot left and fade
+            setTimeout(function() {
+              el.style.transition = 'all 0.07s ease-in';
+              el.style.transform = 'translateX(-40px) scale(0.9)';
+              el.style.opacity = '0';
+            }, 80);
+
+            // Navigate after animation
+            setTimeout(function() {
+              window.location.href = href;
+            }, 150);
+          });
         });
       });
     </script>
