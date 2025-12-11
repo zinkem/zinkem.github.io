@@ -3,8 +3,13 @@
 
 @import "jekyll-theme-midnight";
 
-/* Typography - monospace for headings, readable for body */
+/* Override theme background with clean dark blue */
 body {
+  background: #0a1520;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(126, 200, 227, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(91, 138, 154, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 60%, rgba(126, 200, 227, 0.04) 0%, transparent 40%);
   font-size: 15px;
   line-height: 1.7;
 }
